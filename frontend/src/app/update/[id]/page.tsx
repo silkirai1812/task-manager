@@ -10,6 +10,9 @@ export default function UpdateTask() {
   const [task, setTask] = useState<any>({});
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
     const fetchTask = async () => {
       const res = await API.get(`/tasks/${id}`);
       setTask(res.data);
@@ -19,8 +22,23 @@ export default function UpdateTask() {
   }, []);
 
   const handleUpdate = async () => {
-    await API.put(`/tasks/${id}`, task);
-    router.push("/dashboard");
+    try {
+      const token = localStorage.getItem("token");
+      API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+      await API.put(`/tasks/${id}`, {
+        title: task.title,
+        description: task.description,
+        status: task.status,
+        priority: task.priority,
+        dueDate: task.dueDate
+      });
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Update failed:", error);
+      alert("Update failed, check console");
+    }
   };
 
   return (

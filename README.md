@@ -131,7 +131,7 @@ NEXT_PUBLIC_API_URL=https://your-backend-url.onrender.com
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 ```
 task-manager/
 ├── backend/
@@ -156,7 +156,7 @@ task-manager/
 └── README.md
 ```
 
-## 🧠 System Architecture
+## System Architecture
 
 Frontend (Next.js)  
 ↓  
