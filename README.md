@@ -78,9 +78,9 @@ Frontend will run on: http://localhost:3000
 
 ### 4. Running the App
 
-Open: http://localhost:3000
-Register or Login
-Start managing your tasks
+- Open: http://localhost:3000
+- Register or Login
+- Start managing your tasks
 
 
 ## Deployment
@@ -156,23 +156,18 @@ task-manager/
 └── README.md
 ```
 
-## System Architecture
+## 🧠 System Architecture
 
-The application follows a simple client-server architecture:
-
-Frontend (Next.js + React)  
-            ↓  
-Sends API requests (Axios)  
-            ↓  
+Frontend (Next.js)  
+↓  
+API Calls (Axios)  
+↓  
 Backend (Node.js + Express)  
-            ↓  
-Handles different modules:
-- Authentication (login/register)
-- User profile management
-- Task management (CRUD operations)
-- Admin operations
-- Analytics  
-            ↓  
-Data is stored and retrieved from MongoDB using Mongoose
+├── Auth  
+├── Tasks  
+├── Admin  
+├── Analytics  
+↓  
+MongoDB  
 
 
