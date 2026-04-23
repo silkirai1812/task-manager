@@ -35,7 +35,7 @@ A full-stack task management application that allows users to manage tasks effic
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/task-manager.git
+git clone https://github.com/silkirai1812/task-manager.git
 cd task-manager 
 ```
 
@@ -44,36 +44,37 @@ cd task-manager
 ```bash
 cd backend 
 npm install
-
+```
 Create a .env file inside the backend folder:
 
+```bash
 PORT=4000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
+```
 
 Run the backend server:
-
+```bash
 npm run dev
-
-Backend will run on: http://localhost:4000
 ```
+Backend will run on: http://localhost:4000
+
 
 ### 3. Frontend Setup
 
 ```bash
 cd frontend
 npm install
-
-Create a .env file:
-
-NEXT_PUBLIC_API_URL=http://localhost:4000
-
-Run the frontend:
-
-npm run dev
-
-Frontend will run on: http://localhost:3000
 ```
+Create a .env file:
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:4000
+```
+Run the frontend:
+```bash
+npm run dev
+```
+Frontend will run on: http://localhost:3000
 
 ### 4. Running the App
 ```bash
@@ -82,14 +83,14 @@ Register or Login
 Start managing your tasks
 ```
 
-## 🌐 Deployment
+## Deployment
 
 - **Frontend:** Vercel  
 - **Backend:** Render  
 
-⚠️ Make sure to configure environment variables correctly on both platforms.
+Make sure to configure environment variables correctly on both platforms.
 
-### 🔧 Environment Variables (Production)
+### Environment Variables (Production)
 
 #### Backend (Render)
 ```env
@@ -131,13 +132,12 @@ NEXT_PUBLIC_API_URL=https://your-backend-url.onrender.com
 ---
 
 ## System Architecture
-## 🧠 System Architecture
 
 ```mermaid
 flowchart TD
 
 A[Frontend (Next.js / React)]
---> B[Axios API Calls]
+--> B[Axios (API Requests)]
 
 B --> C[Backend (Node.js + Express)]
 
@@ -152,4 +152,5 @@ D2 --> E
 D3 --> E
 D4 --> E
 D5 --> E
+```
 
