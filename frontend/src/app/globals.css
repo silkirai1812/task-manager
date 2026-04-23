@@ -1,0 +1,101 @@
+body {
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0, #cbd5f5);
+  color: #0f172a;
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at top right,
+    rgba(99, 102, 241, 0.15),
+    transparent 40%
+  );
+  z-index: -1;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  color: #0f172a;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 14px;
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+.form-control {
+  background: rgba(255, 255, 255, 0.8);
+  color: #0f172a;
+  border: 1px solid #cbd5f5;
+}
+
+.form-control::placeholder {
+  color: #64748b;
+}
+
+.form-control:focus {
+  border-color: #6366f1;
+  box-shadow: none;
+}
+
+.form-label {
+  color: #334155;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  border: none;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border: none;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border: none;
+}
+
+
+.navbar {
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.navbar h5 {
+  color: #4f46e5;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 6px 10px;
+}
+
+.text-muted {
+  color: #64748b !important;
+}
+
+.alert {
+  border-radius: 10px;
+  border: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 10px;
+}
