@@ -357,7 +357,8 @@ export default function Dashboard() {
         title: "",
         description: "",
         status: "todo",
-        priority: "low",
+        // priority: "low",
+        priority: "",
         dueDate: ""
       });
 
