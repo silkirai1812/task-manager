@@ -77,11 +77,11 @@ npm run dev
 Frontend will run on: http://localhost:3000
 
 ### 4. Running the App
-```bash
+
 Open: http://localhost:3000
 Register or Login
 Start managing your tasks
-```
+
 
 ## Deployment
 
@@ -131,26 +131,48 @@ NEXT_PUBLIC_API_URL=https://your-backend-url.onrender.com
 
 ---
 
+## 📁 Folder Structure
+```
+task-manager/
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── routes/
+│   │   ├── models/
+│   │   ├── middleware/
+│   │   ├── config/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── server.ts
+│   └── package.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   └── services/
+│   └── package.json
+│
+└── README.md
+```
+
 ## System Architecture
 
-```mermaid
-flowchart TD
+The application follows a simple client-server architecture:
 
-A[Frontend (Next.js / React)]
---> B[Axios (API Requests)]
+Frontend (Next.js + React)  
+            ↓  
+Sends API requests (Axios)  
+            ↓  
+Backend (Node.js + Express)  
+            ↓  
+Handles different modules:
+- Authentication (login/register)
+- User profile management
+- Task management (CRUD operations)
+- Admin operations
+- Analytics  
+            ↓  
+Data is stored and retrieved from MongoDB using Mongoose
 
-B --> C[Backend (Node.js + Express)]
-
-C --> D1[Auth Routes]
-C --> D2[User Routes]
-C --> D3[Task Routes]
-C --> D4[Admin Routes]
-C --> D5[Analytics Routes]
-
-D1 --> E[(MongoDB)]
-D2 --> E
-D3 --> E
-D4 --> E
-D5 --> E
-```
 
