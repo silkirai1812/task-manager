@@ -9,35 +9,28 @@ import taskRoutes from "./routes/task.routes";
 import analyticsRoutes from "./routes/analytics.routes";
 import adminRoutes from "./routes/admin.routes";
 import userRoutes from "./routes/user.routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger";
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false })); // fixes swagger UI loading
 app.use(morgan("dev"));
 
-app.use("/auth", authRoutes);
-app.use("/tasks", taskRoutes);
-app.use("/analytics", analyticsRoutes);
-app.use("/admin", adminRoutes);
-app.use("/users", userRoutes);
+// swagger docs
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// routes
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/analytics", analyticsRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
-});
-
-app.get("/create", async (req, res) => {
-  try {
-    const user = await User.create({
-      name: "Silki",
-      email: "silki@test.com",
-      password: "123456"
-    });
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error });
-  }
 });
 
 app.get("/protected", protect, (req: any, res) => {
@@ -47,9 +40,4 @@ app.get("/protected", protect, (req: any, res) => {
   });
 });
 
-
 export default app;
-
-// app.listen(3000,()=>{
-//     console.log("app is running at port 3000");
-// })
