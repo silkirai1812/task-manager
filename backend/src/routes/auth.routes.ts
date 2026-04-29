@@ -1,7 +1,16 @@
 import express from "express";
 import { register, login } from "../controllers/auth.controller";
+import { validate } from "../middleware/validate.middleware";
+import { registerSchema, loginSchema } from "../validators/auth.validator";
+import rateLimit from "express-rate-limit";
 
 const router = express.Router();
+
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10,
+  message: { message: "Too many attempts, please try again after 15 minutes" }
+});
 
 /**
  * @swagger
@@ -37,7 +46,7 @@ const router = express.Router();
  *       201:
  *         description: User registered successfully
  *       400:
- *         description: User already exists
+ *         description: User already exists or validation failed
  *
  * /auth/login:
  *   post:
@@ -66,8 +75,7 @@ const router = express.Router();
  *         description: Invalid credentials
  */
 
-
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", authLimiter, validate(registerSchema), register);
+router.post("/login", authLimiter, validate(loginSchema), login);
 
 export default router;

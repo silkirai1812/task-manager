@@ -7,6 +7,8 @@ import {
   deleteTask
 } from "../controllers/task.controller";
 import { protect } from "../middleware/auth.middleware";
+import { validate } from "../middleware/validate.middleware";
+import { createTaskSchema, updateTaskSchema } from "../validators/task.validator";
 
 const router = express.Router();
 
@@ -42,6 +44,7 @@ const router = express.Router();
  *             required:
  *               - title
  *               - description
+ *               - dueDate
  *             properties:
  *               title:
  *                 type: string
@@ -64,6 +67,8 @@ const router = express.Router();
  *     responses:
  *       201:
  *         description: Task created with AI generated summary
+ *       400:
+ *         description: Validation failed
  *       401:
  *         description: Unauthorized
  *
@@ -79,7 +84,6 @@ const router = express.Router();
  *         required: true
  *         schema:
  *           type: string
- *         example: 64f1a2b3c4d5e6f7a8b9c0d1
  *     responses:
  *       200:
  *         description: Task found
@@ -99,7 +103,6 @@ const router = express.Router();
  *         required: true
  *         schema:
  *           type: string
- *         example: 64f1a2b3c4d5e6f7a8b9c0d1
  *     requestBody:
  *       content:
  *         application/json:
@@ -121,7 +124,9 @@ const router = express.Router();
  *                 format: date
  *     responses:
  *       200:
- *         description: Task updated with regenerated AI summary
+ *         description: Task updated
+ *       400:
+ *         description: Validation failed
  *       403:
  *         description: Not allowed
  *       404:
@@ -138,7 +143,6 @@ const router = express.Router();
  *         required: true
  *         schema:
  *           type: string
- *         example: 64f1a2b3c4d5e6f7a8b9c0d1
  *     responses:
  *       200:
  *         description: Task deleted
@@ -148,10 +152,10 @@ const router = express.Router();
  *         description: Task not found
  */
 
-router.post("/", protect, createTask);
+router.post("/", protect, validate(createTaskSchema), createTask);
 router.get("/", protect, getTasks);
 router.get("/:id", protect, getTaskById);
-router.put("/:id", protect, updateTask);
+router.put("/:id", protect, validate(updateTaskSchema), updateTask);
 router.delete("/:id", protect, deleteTask);
 
 export default router;
