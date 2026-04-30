@@ -1,6 +1,8 @@
 import express from "express";
 import { getProfile, updateProfile } from "../controllers/user.controller";
 import { protect } from "../middleware/auth.middleware";
+import { validate } from "../middleware/validate.middleware";
+import { updateProfileSchema } from "../validators/user.validator";
 
 const router = express.Router();
 
@@ -39,15 +41,19 @@ const router = express.Router();
  *               email:
  *                 type: string
  *                 example: johnupdated@example.com
+ *               password:
+ *                 type: string
+ *                 example: newpassword123
  *     responses:
  *       200:
  *         description: Profile updated
+ *       400:
+ *         description: Validation failed
  *       401:
- *         description: Unauthorized
+ *         description: Unauthorized user
  */
 
-
 router.get("/profile", protect, getProfile);
-router.put("/profile", protect, updateProfile);
+router.put("/profile", protect, validate(updateProfileSchema), updateProfile);
 
 export default router;

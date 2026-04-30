@@ -76,13 +76,18 @@ export const updateTask = async (req: any, res: Response) => {
       return res.status(403).json({ message: "Not allowed" });
     }
 
-    let updatedData = { ...req.body };
+    const { title, description, status, priority, dueDate } = req.body;
+    let updatedData: any = { title, description, status, priority, dueDate };
 
-    if (req.body.description) {
+    Object.keys(updatedData).forEach(
+      key => updatedData[key] === undefined && delete updatedData[key]
+    );
+
+    if (description) {
       try {
         const [summary, suggestedPriority] = await Promise.all([
-          generateSummaryAI(req.body.description),
-          req.body.priority ? Promise.resolve(req.body.priority) : suggestPriorityAI(req.body.description)
+          generateSummaryAI(description),
+          priority ? Promise.resolve(priority) : suggestPriorityAI(description)
         ]);
 
         updatedData.summary = summary;
